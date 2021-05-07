@@ -11,9 +11,20 @@ import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 import ChatIcon from "@material-ui/icons/Chat";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "./Firebase";
+import { logout, selectUser } from "./features/userSlice";
 
 function Header() {
+
+
+  const dispatch = useDispatch();
+
+  const logoutOfApp = () => {
+    dispatch(logout());
+    auth.signOut();
+  }
+
   return (
     <div className="header">
       <div className="header__left">
@@ -30,8 +41,9 @@ function Header() {
         <HeaderOption Icon={ChatIcon} title="Messaging" />
         <HeaderOption Icon={NotificationsIcon} title="Notifications" />
         <HeaderOption
-          avatar="https://i0.wp.com/newspack-washingtoncitypaper.s3.amazonaws.com/uploads/2009/04/contexts.org_socimages_files_2009_04_d_silhouette.png?resize=1200%2C756&ssl=1"
+          avatar={true}
           title="Me"
+          onClick={logoutOfApp}
         />
       </div>{" "}
     </div>
